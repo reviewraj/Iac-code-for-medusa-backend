@@ -43,7 +43,7 @@ resource "aws_ecs_task_definition" "medusa_postgres" {
   
   container_definitions = jsonencode([{
     name      = "medusa_postgres"
-    image     = "postgres:13"
+    image     = var.postgres_container_name.name
     essential = true
     portMappings = [{
       containerPort = 5432
@@ -91,7 +91,7 @@ resource "aws_ecs_task_definition" "medusa_backend_server" {
   
   container_definitions = jsonencode([{
     name      = "medusa_backend"
-    image     = "767397946501.dkr.ecr.us-east-1.amazonaws.com/medusa-backend-prod:attempt35"
+    image     = var.medusa_container_name.name
     essential = true
 	"enableExecuteCommand": true
     portMappings = [{
